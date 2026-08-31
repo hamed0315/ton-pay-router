@@ -1,0 +1,75 @@
+
+{
+  "loading": {
+    "title": "Инициализация OmnixPay...",
+    "statuses": ["Маршрутизация сетей", "Установка защищенного канала", "Синхронизация реестра"]
+  },
+  "pay": {
+    "title": "Оплата",
+    "invoiceId": "ID счета",
+    "connectWallet": "Подключить кошелек",
+    "confirmPayment": "Подтвердить оплату",
+    "processing": "Обработка платежа...",
+    "success": "Платеж успешен",
+    "failed": "Платеж не удался",
+    "continue": "Продолжить",
+    "back": "Назад",
+    "newPayment": "Новый платеж",
+    "routing": "Маршрутизация через протокол...",
+    "txHash": "Хэш транзакции",
+    "disconnect": "Отключить",
+    "connectTon": "Подключить TON",
+    "connectEvm": "Подключить EVM"
+  },
+  "dashboard": {
+    "title": "Панель управления",
+    "welcome": "С возвращением!",
+    "newInvoice": "+ Новый счет",
+    "totalVolume": "Общий объем",
+    "successfulInvoices": "Успешные счета",
+    "spreadIncome": "Доход от спреда",
+    "successRate": "Успешность",
+    "volumeChart": "Объем транзакций",
+    "protocolStatus": "Статус протокола",
+    "pendingInvoices": "Ожидающие счета",
+    "avgSettlement": "Среднее время расчета",
+    "activeNetworks": "Активные сети",
+    "systemHealthy": "Система здорова",
+    "recentTransactions": "Последние транзакции",
+    "viewAll": "Показать все",
+    "period24h": "24ч",
+    "period7d": "7д",
+    "period30d": "30д"
+  },
+  "invoices": {
+    "title": "Счета",
+    "newInvoice": "+ Новый счет",
+    "filterAll": "Все",
+    "filterPending": "Ожидающие",
+    "filterSettled": "Оплаченные",
+    "filterFailed": "Неудачные",
+    "invoiceId": "ID счета",
+    "amount": "Сумма",
+    "status": "Статус",
+    "date": "Дата"
+  },
+  "settings": {
+    "title": "Настройки",
+    "settlementAddress": "Адрес расчета",
+    "apiKey": "API ключ",
+    "webhookUrl": "URL вебхука",
+    "save": "Сохранить",
+    "copy": "Копировать",
+    "regenerate": "Перегенерировать",
+    "show": "Показать",
+    "hide": "Скрыть"
+  },
+  "common": {
+    "cancel": "Отмена",
+    "copy": "Копировать",
+    "copied": "Скопировано!",
+    "loading": "Загрузка...",
+    "error": "Произошла ошибка",
+    "tryAgain": "Попробовать снова"
+  }
+}

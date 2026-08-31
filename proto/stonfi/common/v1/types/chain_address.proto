@@ -1,0 +1,19 @@
+
+syntax = "proto3";
+
+package stonfi.common.v1;
+option go_package = "github.com/ton-pay-router/core/proto/stonfi/common/v1/types";
+
+message ChainAddress {
+  oneof chain {
+    string arbitrum = 1;
+    string avalanche = 2;
+    string base = 3;
+    string bnb = 4;
+    string ethereum = 5;
+    string polygon = 6;
+    string robinhood = 7;
+    string ton = 50;
+    string tron = 60;
+  }
+}

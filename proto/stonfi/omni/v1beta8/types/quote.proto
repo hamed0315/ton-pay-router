@@ -1,0 +1,93 @@
+
+syntax = "proto3";
+
+package stonfi.omni.v1beta8;
+option go_package = "github.com/ton-pay-router/core/proto/stonfi/omni/v1beta8/types";
+
+import "stonfi/common/v1/types/asset_id.proto";
+import "stonfi/common/v1/types/chain_address.proto";
+import "stonfi/omni/v1beta8/types/common.proto";
+import "stonfi/omni/v1beta8/types/swap.proto";
+
+enum GaslessSettlement {
+  GASLESS_SETTLEMENT_PROHIBITED = 0;
+  GASLESS_SETTLEMENT_POSSIBLE = 1;
+  GASLESS_SETTLEMENT_REQUIRED = 2;
+}
+
+message SwapSettlementParams {
+  optional uint32 max_price_slippage_pips = 1;
+  optional uint32 max_routes = 2;
+  optional bool flexible_integrator_fee = 3;
+  optional bool allow_risky_routes = 4;
+}
+
+message OrderSettlementParams {}
+
+message SettlementParams {
+  oneof params {
+    SwapSettlementParams swap = 1;
+    OrderSettlementParams order = 2;
+  }
+}
+
+message SwapSettlementData {
+  repeated SwapRoute routes = 1;
+  string min_output_amount = 50;
+  string recommended_min_output_amount = 51;
+  uint32 recommended_slippage_pips = 52;
+  optional uint32 price_impact_pips = 53;
+}
+
+message OrderSettlementData {
+  stonfi.common.v1.ChainAddress src_protocol_contract_address = 1;
+  optional stonfi.common.v1.ChainAddress src_wrapped_native_token_address = 2;
+  optional stonfi.common.v1.ChainAddress src_initial_resolver_address = 3;
+  optional stonfi.common.v1.AssetId src_htlc_security_deposit_asset = 4;
+  optional string src_htlc_security_deposit_units = 5;
+  optional HashingFunction htlc_hashing_function = 6;
+  optional stonfi.common.v1.ChainAddress dst_protocol_contract_address = 10;
+  string resolver_sends_units = 11;
+  optional stonfi.common.v1.ChainAddress dst_wrapped_native_token_address = 12;
+  optional stonfi.common.v1.AssetId dst_security_deposit_asset = 13;
+  optional string dst_security_deposit_units = 14;
+  uint64 trade_start_deadline = 20;
+  uint64 exclusivity_timeout = 21;
+  uint32 integrator_fee_pips = 30;
+  uint32 protocol_fee_pips = 31;
+  optional stonfi.common.v1.ChainAddress protocol_fee_recipient_address = 32;
+}
+
+message QuoteRequest {
+  stonfi.common.v1.AssetId input_asset = 1;
+  stonfi.common.v1.AssetId output_asset = 2;
+  oneof amount {
+    string input_units = 3;
+    string output_units = 4;
+  }
+  optional stonfi.common.v1.ChainAddress integrator_address = 5;
+  optional uint32 integrator_fee_pips = 6;
+  repeated SettlementParams settlement_params = 7;
+}
+
+message Quote {
+  string rfq_id = 1;
+  string quote_id = 2;
+  string resolver_id = 3;
+  string resolver_name = 4;
+  stonfi.common.v1.AssetId input_asset = 10;
+  stonfi.common.v1.AssetId output_asset = 11;
+  string input_units = 12;
+  string output_units = 13;
+  optional stonfi.common.v1.ChainAddress integrator_address = 20;
+  string integrator_fee_units = 21;
+  string protocol_fee_units = 22;
+  uint64 quote_timestamp = 30;
+  optional uint64 estimated_settlement_duration = 31;
+  oneof settlement_data {
+    SwapSettlementData swap = 40;
+    OrderSettlementData order = 41;
+  }
+  optional string gas_budget = 50;
+  optional string estimated_gas_consumption = 51;
+}

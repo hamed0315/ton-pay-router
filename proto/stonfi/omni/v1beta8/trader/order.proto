@@ -1,0 +1,80 @@
+
+syntax = "proto3";
+
+package stonfi.omni.v1beta8;
+option go_package = "github.com/ton-pay-router/core/proto/stonfi/omni/v1beta8/trader";
+
+import "google/protobuf/empty.proto";
+import "stonfi/common/v1/types/asset_id.proto";
+import "stonfi/common/v1/types/chain_address.proto";
+import "stonfi/omni/v1beta8/types/order.proto";
+import "stonfi/omni/v1beta8/types/quote.proto";
+
+message LimitOrderCreateRequest {
+  stonfi.common.v1.AssetId input_asset = 1;
+  stonfi.common.v1.AssetId output_asset = 2;
+  string input_units = 3;
+  string output_units = 4;
+  stonfi.common.v1.ChainAddress integrator_address = 5;
+  optional uint32 integrator_fee_pips = 6;
+  OrderSettlementParams settlement_params = 7;
+}
+
+message LimitOrderResponse { Quote quote = 1; }
+
+message ActiveOrdersRequest {
+  stonfi.common.v1.ChainAddress trader_address = 1;
+}
+
+message ActiveOrder {
+  Order order = 1;
+  Quote quote = 2;
+}
+
+message ActiveOrdersResponse { repeated ActiveOrder active_orders = 1; }
+
+message TrackOrderRequest {
+  string quote_id = 1;
+  stonfi.common.v1.ChainAddress trader_address = 2;
+}
+
+message RegisterSignedOrderRequest {
+  string quote_id = 1;
+  stonfi.common.v1.ChainAddress owner_src_address = 2;
+  SignedOrder signed_order = 3;
+  optional bytes serialized_order_details = 4;
+}
+
+message CancelSignedOrderRequest {
+  string quote_id = 1;
+  stonfi.common.v1.ChainAddress owner_src_address = 2;
+  SignedOrderCancellation signed_cancellation = 3;
+}
+
+message SignedOrderCancelledOffchain {}
+
+message SignedOrderOnchainCancellationRequired {
+  Order order = 1;
+}
+
+message CancelSignedOrderResponse {
+  oneof result {
+    SignedOrderCancelledOffchain cancelled_offchain = 1;
+    SignedOrderOnchainCancellationRequired requires_onchain = 2;
+  }
+}
+
+message DiscloseHtlcSecretRequest {
+  string quote_id = 1;
+  uint64 execution_index = 2;
+  bytes secret = 3;
+}
+
+service OrderRpc {
+  rpc Create(LimitOrderCreateRequest) returns (LimitOrderResponse) {}
+  rpc GetActive(ActiveOrdersRequest) returns (ActiveOrdersResponse) {}
+  rpc Track(TrackOrderRequest) returns (stream OrderStatusEvent) {}
+  rpc RegisterSignedOrder(RegisterSignedOrderRequest) returns (google.protobuf.Empty) {}
+  rpc CancelSignedOrder(CancelSignedOrderRequest) returns (CancelSignedOrderResponse) {}
+  rpc DiscloseHtlcSecret(DiscloseHtlcSecretRequest) returns (google.protobuf.Empty) {}
+}

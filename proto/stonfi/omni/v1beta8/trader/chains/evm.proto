@@ -1,0 +1,39 @@
+
+syntax = "proto3";
+
+package stonfi.omni.v1beta8;
+option go_package = "github.com/ton-pay-router/core/proto/stonfi/omni/v1beta8/trader/chains";
+
+import "stonfi/common/v1/types/chain_address.proto";
+import "stonfi/omni/v1beta8/types/htlc.proto";
+
+message BuildEvmOrderPayloadRequest {
+  string quote_id = 1;
+  stonfi.common.v1.ChainAddress owner_src_address = 2;
+  optional stonfi.common.v1.ChainAddress trader_dst_address = 4;
+  optional bytes encoded_permit_data = 10;
+  optional bytes permit_signature = 11;
+  optional bool use_permit2 = 12;
+  optional HtlcSecrets htlc_secrets = 20;
+  optional stonfi.common.v1.ChainAddress trader_dst_disclose_address = 21;
+}
+
+message EvmOrderPayloadResponse {
+  string typed_data = 1;
+  bytes order_extension = 2;
+  optional bytes serialized_order_details = 3;
+}
+
+message BuildEvmOrderCancellationRequest {
+  string quote_id = 1;
+  stonfi.common.v1.ChainAddress owner_src_address = 2;
+}
+
+message EvmOrderCancellationResponse {
+  string typed_data = 1;
+}
+
+service EvmRpc {
+  rpc BuildOrderPayload(BuildEvmOrderPayloadRequest) returns (EvmOrderPayloadResponse) {}
+  rpc BuildOrderCancellation(BuildEvmOrderCancellationRequest) returns (EvmOrderCancellationResponse) {}
+}

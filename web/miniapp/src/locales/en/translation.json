@@ -1,0 +1,75 @@
+
+{
+  "loading": {
+    "title": "Initializing OmnixPay...",
+    "statuses": ["Routing Networks", "Establishing Secure Channel", "Syncing Ledger"]
+  },
+  "pay": {
+    "title": "Payment",
+    "invoiceId": "Invoice ID",
+    "connectWallet": "Connect Wallet",
+    "confirmPayment": "Confirm Payment",
+    "processing": "Processing Payment...",
+    "success": "Payment Successful",
+    "failed": "Payment Failed",
+    "continue": "Continue",
+    "back": "Back",
+    "newPayment": "New Payment",
+    "routing": "Routing through protocol...",
+    "txHash": "Transaction hash",
+    "disconnect": "Disconnect",
+    "connectTon": "Connect TON",
+    "connectEvm": "Connect EVM"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome back!",
+    "newInvoice": "+ New Invoice",
+    "totalVolume": "Total Volume",
+    "successfulInvoices": "Successful Invoices",
+    "spreadIncome": "Spread Income",
+    "successRate": "Success Rate",
+    "volumeChart": "Transaction Volume",
+    "protocolStatus": "Protocol Status",
+    "pendingInvoices": "Pending Invoices",
+    "avgSettlement": "Avg Settlement Time",
+    "activeNetworks": "Active Networks",
+    "systemHealthy": "System Healthy",
+    "recentTransactions": "Recent Transactions",
+    "viewAll": "View All",
+    "period24h": "24h",
+    "period7d": "7d",
+    "period30d": "30d"
+  },
+  "invoices": {
+    "title": "Invoices",
+    "newInvoice": "+ New Invoice",
+    "filterAll": "All",
+    "filterPending": "Pending",
+    "filterSettled": "Settled",
+    "filterFailed": "Failed",
+    "invoiceId": "Invoice ID",
+    "amount": "Amount",
+    "status": "Status",
+    "date": "Date"
+  },
+  "settings": {
+    "title": "Settings",
+    "settlementAddress": "Settlement Address",
+    "apiKey": "API Key",
+    "webhookUrl": "Webhook URL",
+    "save": "Save",
+    "copy": "Copy",
+    "regenerate": "Regenerate",
+    "show": "Show",
+    "hide": "Hide"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "tryAgain": "Try Again"
+  }
+}

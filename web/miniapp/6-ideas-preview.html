@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TON Pay Router - 6 Creative Ideas</title>
+    <style>
+        body { background: #0B0B14; color: white; font-family: sans-serif; padding: 40px 20px; }
+        h1 { text-align: center; background: linear-gradient(90deg, #A855F7, #0098EA); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; font-size: 28px; }
+        .subtitle { text-align: center; color: rgba(255,255,255,0.6); margin-bottom: 40px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1300px; margin: 0 auto; }
+        .card { background: rgba(255,255,255,0.04); border: 1px solid rgba(168,85,247,0.2); border-radius: 20px; padding: 30px 20px; text-align: center; transition: all 0.3s; }
+        .card:hover { transform: translateY(-8px); border-color: #A855F7; box-shadow: 0 20px 40px rgba(168,85,247,0.2); }
+        .logo-box { height: 160px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+        .logo-box svg { width: 110px; height: 110px; }
+        .title { font-size: 18px; font-weight: bold; color: #0098EA; margin-bottom: 8px; }
+        .desc { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+        /* Animations */
+        .breathing { animation: breathe 3s ease-in-out infinite; }
+        @keyframes breathe { 0%, 100% { transform: scale(1); opacity: 0.9; } 50% { transform: scale(1.08); opacity: 1; } }
+
+        .pulse-out { animation: pulseOut 2s ease-in-out infinite; }
+        @keyframes pulseOut { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; } }
+
+        .shine { position: relative; overflow: hidden; }
+        .shine::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); animation: shineMove 3s infinite; }
+        @keyframes shineMove { 0% { left: -100%; } 100% { left: 200%; } }
+
+        .rotate-3d { animation: rotate3d 5s linear infinite; transform-style: preserve-3d; }
+        @keyframes rotate3d { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(360deg); } }
+
+        .data-flow { stroke-dasharray: 6 4; animation: dashFlow 2s linear infinite; }
+        @keyframes dashFlow { to { stroke-dashoffset: -20; } }
+
+        .orbit-ring { animation: orbit 4s linear infinite; transform-origin: center; }
+        @keyframes orbit { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+<h1>TON Pay Router</h1>
+<p class="subtitle">۶ ایده خلاقانه برای مثلث توپر برند</p>
+
+<div class="grid">
+
+    <!-- Idea 1: Magnet Triangle -->
+    <div class="card">
+        <div class="logo-box">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="g1" x1="0" y1="0" x2="100" y2="100"><stop offset="0%" stop-color="#A855F7"/><stop offset="100%" stop-color="#0098EA"/></linearGradient></defs>
+                <polygon points="50,90 10,20 90,20" fill="url(#g1)" class="breathing"/>
+                <circle cx="10" cy="20" r="2" fill="#A855F7"/>
+                <circle cx="90" cy="20" r="2" fill="#0098EA"/>
+                <motion.circle cx="50" cy="50" r="2" fill="white" class="pulse-out"/>
+            </svg>
+        </div>
+        <div class="title">۱. مثلث آهنربایی</div>
+        <div class="desc">ذرات نور به سمت مثلث کشیده می‌شوند و مثلث نفس می‌کشد.</div>
+    </div>
+
+    <!-- Idea 2: Center Pulse -->
+    <div class="card">
+        <div class="logo-box">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="g2" x1="0" y1="0" x2="100" y2="100"><stop offset="0%" stop-color="#A855F7"/><stop offset="100%" stop-color="#0098EA"/></linearGradient></defs>
+                <polygon points="50,90 10,20 90,20" fill="url(#g2)"/>
+                <circle cx="50" cy="50" r="30" fill="none" stroke="#A855F7" stroke-width="1" class="pulse-out"/>
+                <circle cx="50" cy="50" r="18" fill="none" stroke="#0098EA" stroke-width="1" class="pulse-out" style="animation-delay: 0.5s;"/>
+            </svg>
+        </div>
+        <div class="title">۲. پالس از مرکز</div>
+        <div class="desc">موج‌های نور از مرکز به لبه‌ها می‌رسند (حس پردازش).</div>
+    </div>
+
+    <!-- Idea 3: Glass Reflection -->
+    <div class="card">
+        <div class="logo-box">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="shine">
+                <defs><linearGradient id="g3" x1="0" y1="0" x2="100" y2="100"><stop offset="0%" stop-color="#A855F7"/><stop offset="100%" stop-color="#0098EA"/></linearGradient></defs>
+                <polygon points="50,90 10,20 90,20" fill="url(#g3)"/>
+            </svg>
+        </div>
+        <div class="title">۳. بازتاب شیشه‌ای</div>
+        <div class="desc">نور روی سطح مثلث حرکت می‌کند (حس شفافیت و ارزش).</div>
+    </div>
+
+    <!-- Idea 4: 3D Rotate -->
+    <div class="card">
+        <div class="logo-box">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="rotate-3d">
+                <defs><linearGradient id="g4" x1="0" y1="0" x2="100" y2="100"><stop offset="0%" stop-color="#A855F7"/><stop offset="100%" stop-color="#0098EA"/></linearGradient></defs>
+                <polygon points="50,90 10,20 90,20" fill="url(#g4)"/>
+                <line x1="10" y1="20" x2="90" y2="20" stroke="white" stroke-width="1" opacity="0.5"/>
+            </svg>
+        </div>
+        <div class="title">۴. چرخش سه‌بعدی</div>
+        <div class="desc">مثلث مثل کریستال سه‌بعدی می‌چرخد (حس پروتکل زنده).</div>
+    </div>
+
+    <!-- Idea 5: Data Flow -->
+    <div class="card">
+        <div class="logo-box">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="g5" x1="0" y1="0" x2="100" y2="100"><stop offset="0%" stop-color="#A855F7"/><stop offset="100%" stop-color="#0098EA"/></linearGradient></defs>
+                <polygon points="50,90 10,20 90,20" fill="url(#g5)"/>
+                <line x1="50" y1="90" x2="50" y2="20" stroke="#22D3EE" stroke-width="2" class="data-flow"/>
+                <line x1="30" y1="60" x2="70" y2="60" stroke="white" stroke-width="1" opacity="0.3" class="data-flow"/>
+            </svg>
+        </div>
+        <div class="title">۵. جریان داده</div>
+        <div class="desc">خطوط نئونی روی سطح مثلث حرکت می‌کنند (حس انتقال).</div>
+    </div>
+
+    <!-- Idea 6: Orbit Rings -->
+    <div class="card">
+        <div class="logo-box">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="g6" x1="0" y1="0" x2="100" y2="100"><stop offset="0%" stop-color="#A855F7"/><stop offset="100%" stop-color="#0098EA"/></linearGradient></defs>
+                <polygon points="50,90 10,20 90,20" fill="url(#g6)"/>
+                <ellipse cx="50" cy="50" rx="35" ry="10" fill="none" stroke="#A855F7" stroke-width="1.5" class="orbit-ring"/>
+                <ellipse cx="50" cy="50" rx="30" ry="8" fill="none" stroke="#0098EA" stroke-width="1.5" class="orbit-ring" style="animation-direction: reverse;"/>
+            </svg>
+        </div>
+        <div class="title">۶. خطوط مداری</div>
+        <div class="desc">خطوط نئونی دور مثلث می‌چرخند (حس شبکه امن).</div>
+    </div>
+
+</div>
+
+</body>
+</html>

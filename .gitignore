@@ -1,0 +1,9 @@
+
+node_modules/
+web/miniapp/node_modules/
+webapp/node_modules/
+dist/
+build/
+*.log
+.env
+.DS_Store

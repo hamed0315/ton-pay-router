@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TON Secure Gateway Preview</title>
+    <style>
+        body { background: #0B0B14; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: sans-serif; }
+        .logo-box { width: 240px; height: 240px; cursor: pointer; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .logo-box:hover { transform: rotateY(15deg) rotateX(10deg) scale(1.05); }
+        .desc { color: rgba(255,255,255,0.7); margin-top: 20px; font-size: 14px; text-align: center; max-width: 350px; line-height: 1.6; }
+        .pulse { animation: pulse 2s ease-in-out infinite; transform-origin: center; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.15); opacity: 1; } }
+    </style>
+</head>
+<body>
+    <div class="logo-box">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="neonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#A855F7"/>
+                    <stop offset="100%" stop-color="#0098EA"/>
+                </linearGradient>
+                <linearGradient id="highlight" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8"/>
+                    <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+                </linearGradient>
+                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="3" result="blur" />
+                    <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+            </defs>
+
+            <!-- سایه‌ی سه‌بعدی (پشت) -->
+            <polygon points="50,94 8,20 92,20" fill="#1e1b4b" opacity="0.8" />
+
+            <!-- هسته شیشه‌ای داخلی (لایه پروتکل امن) -->
+            <polygon points="50,82 17,27 83,27" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+
+            <!-- مثلث اصلی نئونی (رأس پایین) -->
+            <polygon points="50,90 10,20 90,20" fill="url(#neonGrad)" stroke="url(#neonGrad)" stroke-width="3" filter="url(#glow)" />
+
+            <!-- هایلایت لبه بالا -->
+            <line x1="10" y1="20" x2="90" y2="20" stroke="url(#highlight)" stroke-width="2" />
+
+            <!-- گره ورودی ۱ (شبکه TON - بالا چپ) -->
+            <circle cx="10" cy="20" r="3" fill="#A855F7" filter="url(#glow)" />
+
+            <!-- گره ورودی ۲ (شبکه EVM - بالا راست) -->
+            <circle cx="90" cy="20" r="3" fill="#0098EA" filter="url(#glow)" />
+
+            <!-- گره خروجی/دروازه پرداخت (پایین) -->
+            <circle cx="50" cy="90" r="4.5" fill="#22D3EE" class="pulse" filter="url(#glow)" />
+            <circle cx="50" cy="90" r="1.5" fill="#FFFFFF" />
+        </svg>
+    </div>
+    <div class="desc">
+        <strong>دروازه امن (Secure Gateway)</strong><br>
+        دو پورت ورودی (بنفش: TON، آبی: EVM) و یک درگاه خروجی پرداخت (فیروزه‌ای) با لایه پروتکل شیشه‌ای امن.
+    </div>
+</body>
+</html>

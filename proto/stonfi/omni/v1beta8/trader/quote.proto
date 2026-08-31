@@ -1,0 +1,27 @@
+
+syntax = "proto3";
+
+package stonfi.omni.v1beta8;
+option go_package = "github.com/ton-pay-router/core/proto/stonfi/omni/v1beta8/trader";
+
+import "stonfi/omni/v1beta8/types/common.proto";
+import "stonfi/omni/v1beta8/types/quote.proto";
+
+message NoQuoteEvent {}
+
+message QuoteRequestAck {
+  string rfq_id = 1;
+}
+
+message QuoteEvent {
+  oneof event {
+    QuoteRequestAck ack = 1;
+    Quote quote_updated = 10;
+    NoQuoteEvent no_quote = 11;
+    KeepAlive keep_alive = 100;
+  }
+}
+
+service QuoteRpc {
+  rpc Quote(QuoteRequest) returns (stream QuoteEvent) {}
+}

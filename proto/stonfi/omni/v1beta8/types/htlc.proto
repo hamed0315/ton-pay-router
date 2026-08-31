@@ -1,0 +1,47 @@
+
+syntax = "proto3";
+
+package stonfi.omni.v1beta8;
+option go_package = "github.com/ton-pay-router/core/proto/stonfi/omni/v1beta8/types";
+
+import "stonfi/common/v1/types/asset_id.proto";
+import "stonfi/common/v1/types/chain_address.proto";
+
+message HtlcOrderDetailsV1 {
+  string quote_id = 1;
+  stonfi.common.v1.AssetId output_asset = 2;
+  stonfi.common.v1.ChainAddress trader_dst_address = 3;
+  optional stonfi.common.v1.ChainAddress trader_dst_disclose_address = 4;
+  repeated bytes secret_hashes = 5;
+}
+
+message VersionedHtlcOrderDetails {
+  oneof details {
+    HtlcOrderDetailsV1 version1 = 1;
+  }
+}
+
+message SecretModeGenerated {
+  uint32 max_executions = 1;
+}
+
+message SecretModeProvided {
+  repeated bytes hashes = 1;
+}
+
+message HtlcSecrets {
+  oneof secret_mode {
+    SecretModeGenerated generated = 30;
+    SecretModeProvided provided = 31;
+  }
+}
+
+message TonHtlcDstPositionParams {
+  bytes condition_code_cell = 1;
+}
+
+message HtlcDstPositionParams {
+  oneof params {
+    TonHtlcDstPositionParams ton = 1;
+  }
+}

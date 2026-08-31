@@ -1,0 +1,16 @@
+
+syntax = "proto3";
+
+package stonfi.omni.v1beta8;
+option go_package = "github.com/ton-pay-router/core/proto/stonfi/omni/v1beta8/types";
+
+message TonMessage {
+  string target_address = 1;
+  string send_amount = 2;
+  string payload = 3;
+  optional string jetton_wallet_state_init = 4;
+}
+
+message TonTransaction {
+  repeated TonMessage messages = 1;
+}

@@ -1,0 +1,18 @@
+
+syntax = "proto3";
+
+package stonfi.omni.v1beta8;
+option go_package = "github.com/ton-pay-router/core/proto/stonfi/omni/v1beta8/trader";
+
+import "stonfi/common/v1/types/chain_address.proto";
+import "stonfi/omni/v1beta8/types/swap.proto";
+
+message TrackSwapRequest {
+  string quote_id = 1;
+  stonfi.common.v1.ChainAddress trader_address = 2;
+  string outgoing_tx_query = 3;
+}
+
+service SwapRpc {
+  rpc Track(TrackSwapRequest) returns (stream SwapProgressEvent) {}
+}

@@ -1,0 +1,54 @@
+
+syntax = "proto3";
+
+package stonfi.common.v1;
+option go_package = "github.com/ton-pay-router/core/proto/stonfi/common/v1/types";
+
+import "google/protobuf/empty.proto";
+
+message AssetId {
+  oneof chain {
+    EvmAssetId arbitrum = 1;
+    EvmAssetId avalanche = 2;
+    EvmAssetId base = 3;
+    EvmAssetId bnb = 4;
+    EvmAssetId ethereum = 5;
+    EvmAssetId polygon = 6;
+    EvmAssetId robinhood = 7;
+    TonAssetId ton = 50;
+    TronAssetId tron = 60;
+  }
+}
+
+message TonAssetId {
+  oneof kind {
+    google.protobuf.Empty native = 1;
+    string jetton = 2;
+  }
+}
+
+message TronAssetId {
+  oneof kind {
+    google.protobuf.Empty native = 1;
+    string trc20 = 2;
+    Trc1155AssetId trc1155 = 3;
+  }
+}
+
+message Trc1155AssetId {
+  string contract_address = 1;
+  string token_id = 2;
+}
+
+message EvmAssetId {
+  oneof kind {
+    google.protobuf.Empty native = 1;
+    string erc20 = 2;
+    Erc1155AssetId erc1155 = 3;
+  }
+}
+
+message Erc1155AssetId {
+  string contract_address = 1;
+  string token_id = 2;
+}

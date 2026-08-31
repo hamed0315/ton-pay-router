@@ -1,0 +1,74 @@
+
+syntax = "proto3";
+
+package stonfi.omni.v1beta8;
+option go_package = "github.com/ton-pay-router/core/proto/stonfi/omni/v1beta8/trader/chains";
+
+import "stonfi/common/v1/types/asset_id.proto";
+import "stonfi/common/v1/types/chain_address.proto";
+import "stonfi/omni/v1beta8/types/htlc.proto";
+import "stonfi/omni/v1beta8/types/ton.proto";
+
+message TonVaultBalance {
+  stonfi.common.v1.ChainAddress factory_address = 1;
+  stonfi.common.v1.AssetId asset_address = 2;
+  string amount_units = 3;
+}
+
+message TonEscrowVaultBalancesRequest {
+  stonfi.common.v1.ChainAddress owner_address = 1;
+  optional stonfi.common.v1.ChainAddress escrow_factory_address = 2;
+  optional stonfi.common.v1.AssetId asset_address = 3;
+}
+
+message TonEscrowVaultBalancesResponse {
+  stonfi.common.v1.ChainAddress owner_address = 1;
+  repeated TonVaultBalance balances = 2;
+}
+
+message TonFeeVaultBalancesRequest {
+  stonfi.common.v1.ChainAddress owner_address = 1;
+  optional stonfi.common.v1.ChainAddress vault_factory_address = 2;
+  optional stonfi.common.v1.AssetId asset_address = 3;
+}
+
+message TonFeeVaultBalancesResponse {
+  stonfi.common.v1.ChainAddress owner_address = 1;
+  repeated TonVaultBalance balances = 2;
+}
+
+message BuildTonSwapRequest {
+  string quote_id = 1;
+  stonfi.common.v1.ChainAddress transfer_src_address = 2;
+  optional stonfi.common.v1.ChainAddress trader_dst_address = 3;
+  optional stonfi.common.v1.ChainAddress gas_excess_address = 4;
+  optional stonfi.common.v1.ChainAddress refund_src_address = 5;
+  optional bool use_recommended_slippage = 10;
+}
+
+message BuildTonEscrowTransferRequest {
+  string quote_id = 1;
+  stonfi.common.v1.ChainAddress owner_src_address = 2;
+  optional stonfi.common.v1.ChainAddress trader_dst_address = 3;
+  optional stonfi.common.v1.ChainAddress transfer_src_address = 4;
+  optional stonfi.common.v1.ChainAddress gas_excess_address = 5;
+  optional stonfi.common.v1.ChainAddress refund_src_address = 6;
+  optional bool deposit_via_vault = 10;
+  optional bool refund_to_vault = 11;
+  optional HtlcSecrets htlc_secrets = 20;
+  optional stonfi.common.v1.ChainAddress trader_dst_disclose_address = 21;
+}
+
+message BuildTonEscrowCancellationRequest {
+  string quote_id = 1;
+  stonfi.common.v1.ChainAddress owner_address = 2;
+  optional stonfi.common.v1.ChainAddress gas_excess_address = 3;
+}
+
+service TonRpc {
+  rpc GetEscrowVaultBalances(TonEscrowVaultBalancesRequest) returns (TonEscrowVaultBalancesResponse) {}
+  rpc GetFeeVaultBalances(TonFeeVaultBalancesRequest) returns (TonFeeVaultBalancesResponse) {}
+  rpc BuildSwap(BuildTonSwapRequest) returns (TonTransaction) {}
+  rpc BuildEscrowTransfer(BuildTonEscrowTransferRequest) returns (TonTransaction) {}
+  rpc BuildEscrowCancellation(BuildTonEscrowCancellationRequest) returns (TonTransaction) {}
+}

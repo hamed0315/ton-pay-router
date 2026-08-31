@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TON Prism 3D Logo Preview</title>
+    <style>
+        body {
+            background: #0B0B14;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: sans-serif;
+            color: white;
+            perspective: 800px;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            background: linear-gradient(90deg, #A855F7, #0098EA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .logo-box {
+            width: 200px;
+            height: 200px;
+            cursor: pointer;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .logo-box:hover {
+            transform: rotateY(180deg) rotateX(10deg);
+        }
+        .logo-box svg {
+            width: 100%;
+            height: 100%;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .dash {
+            stroke-dasharray: 6 4;
+            animation: dash 2.5s linear infinite;
+        }
+        @keyframes dash { to { stroke-dashoffset: -20; } }
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+            transform-origin: center;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+        .desc {
+            text-align: center;
+            max-width: 400px;
+            color: rgba(255,255,255,0.7);
+            margin-top: 30px;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+        /* افکت هاله نئونی */
+        .glow {
+            filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.5));
+            transition: filter 0.6s ease;
+        }
+        .logo-box:hover .glow {
+            filter: drop-shadow(0 0 25px rgba(0, 152, 234, 0.7));
+        }
+    </style>
+</head>
+<body>
+    <div class="title">TON Prism 3D</div>
+    <div class="logo-box">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="glow">
+            <defs>
+                <linearGradient id="gradFace" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#A855F7"/>
+                    <stop offset="100%" stop-color="#0098EA"/>
+                </linearGradient>
+                <linearGradient id="gradSide" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#7C3AED"/>
+                    <stop offset="100%" stop-color="#3B82F6"/>
+                </linearGradient>
+                <linearGradient id="whiteLight" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/>
+                    <stop offset="100%" stop-color="#FFFFFF" stop-opacity="1"/>
+                </linearGradient>
+            </defs>
+
+            <!-- جلو (Face) - مثلث اصلی -->
+            <polygon points="50,12 90,90 10,90" fill="url(#gradFace)" fill-opacity="0.3" stroke="url(#gradFace)" stroke-width="3" stroke-linejoin="round"/>
+
+            <!-- سمت راست (Side) - ایجاد عمق سه‌بعدی -->
+            <polygon points="50,12 90,90 65,90" fill="url(#gradSide)" fill-opacity="0.15" stroke="url(#gradSide)" stroke-width="2" stroke-linejoin="round" stroke-opacity="0.5"/>
+
+            <!-- سمت چپ (Side) - ایجاد عمق سه‌بعدی -->
+            <polygon points="50,12 10,90 35,90" fill="url(#gradSide)" fill-opacity="0.15" stroke="url(#gradSide)" stroke-width="2" stroke-linejoin="round" stroke-opacity="0.5"/>
+
+            <!-- ضلع پشتی (Back edge) -->
+            <line x1="50" y1="12" x2="35" y2="90" stroke="#A855F7" stroke-width="1.5" stroke-opacity="0.4"/>
+            <line x1="50" y1="12" x2="65" y2="90" stroke="#0098EA" stroke-width="1.5" stroke-opacity="0.4"/>
+
+            <!-- منشور داخلی (شکست نور) -->
+            <polygon points="50,40 70,75 30,75" fill="url(#gradFace)" class="pulse" fill-opacity="0.6"/>
+
+            <!-- نور ورودی (سفید) -->
+            <path d="M5 50 L38 52" stroke="white" stroke-width="3" stroke-linecap="round" class="dash"/>
+            <circle cx="5" cy="50" r="3" fill="white"/>
+
+            <!-- نور خروجی ۱: آبی TON -->
+            <line x1="55" y1="65" x2="85" y2="65" stroke="#0098EA" stroke-width="3" stroke-linecap="round" class="dash"/>
+            <circle cx="85" cy="65" r="4" fill="#0098EA"/>
+
+            <!-- نور خروجی ۲: بنفش EVM -->
+            <line x1="55" y1="70" x2="75" y2="88" stroke="#A855F7" stroke-width="3" stroke-linecap="round" class="dash"/>
+            <circle cx="75" cy="88" r="4" fill="#A855F7"/>
+
+            <!-- نور خروجی ۳: فیروزه‌ای Base -->
+            <line x1="45" y1="70" x2="25" y2="88" stroke="#22D3EE" stroke-width="3" stroke-linecap="round" class="dash"/>
+            <circle cx="25" cy="88" r="4" fill="#22D3EE"/>
+
+            <!-- نقطه اتصال مرکزی -->
+            <circle cx="50" cy="55" r="5" fill="white" class="pulse"/>
+        </svg>
+    </div>
+    <div class="desc">
+        <strong>منشور سه‌بعدی TON:</strong><br>
+        مثلث TON با عمق سه‌بعدی. نور (پول) وارد می‌شود، منشور آن را می‌شکند و به سه شبکه (TON, EVM, Base) مسیریابی می‌کند.<br>
+        <span style="color: #0098EA;">✨ هاور کنید تا بچرخد</span>
+    </div>
+</body>
+</html>

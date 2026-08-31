@@ -1,0 +1,61 @@
+
+syntax = "proto3";
+
+package stonfi.omni.v1beta8;
+option go_package = "github.com/ton-pay-router/core/proto/stonfi/omni/v1beta8/types";
+
+import "stonfi/common/v1/types/asset_id.proto";
+import "stonfi/common/v1/types/chain_address.proto";
+import "stonfi/omni/v1beta8/types/common.proto";
+
+message SwapRoute { repeated SwapStep steps = 1; }
+
+message SwapStep {
+  stonfi.common.v1.AssetId input_asset = 1;
+  stonfi.common.v1.AssetId output_asset = 2;
+  repeated SwapChunk chunks = 3;
+}
+
+message SwapChunk {
+  string protocol = 1;
+  string input_units = 2;
+  string output_units = 3;
+}
+
+enum SwapChunkResult {
+  SWAP_CHUNK_RESULT_PROCESSING = 0;
+  SWAP_CHUNK_RESULT_FILLED = 1;
+  SWAP_CHUNK_RESULT_ABORTED = 2;
+}
+
+message SwapChunkProgress {
+  string protocol = 1;
+  stonfi.common.v1.ChainAddress target_address = 2;
+  string input_units = 3;
+  string expected_output_units = 4;
+  string actual_output_units = 5;
+  SwapChunkResult result = 6;
+  string tx_hash = 7;
+}
+
+message SwapStepProgress { repeated SwapChunkProgress chunks = 1; }
+
+message SwapRouteProgress { repeated SwapStepProgress steps = 1; }
+
+message SwapProgress {
+  TradeStatus status = 1;
+  string outgoing_tx_hash = 2;
+  repeated SwapRouteProgress routes = 10;
+  optional uint64 transfer_timestamp = 20;
+  optional uint64 estimated_finish_timestamp = 21;
+}
+
+message AwaitingTransfer {}
+
+message SwapProgressEvent {
+  oneof event {
+    AwaitingTransfer awaiting_transfer = 1;
+    SwapProgress progress = 2;
+    KeepAlive keep_alive = 100;
+  }
+}

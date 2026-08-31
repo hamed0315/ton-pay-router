@@ -1,0 +1,40 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  @apply bg-protocol-deep text-white font-sans antialiased overflow-x-hidden;
+  /* گرید سراسری روی تمام صفحات */
+  background-image: url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M0 20H40M20 0V40" stroke="%237c3aed" stroke-opacity="0.15" stroke-width="1"/></svg>');
+  background-size: 40px 40px;
+  background-attachment: fixed;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0B0B14;
+}
+::-webkit-scrollbar-thumb {
+  background: #7C3AED;
+  border-radius: 10px;
+}
+
+.glass-card {
+  @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-lg;
+}
+
+.neon-text {
+  text-shadow: 0 0 10px rgba(124, 58, 237, 0.8), 0 0 20px rgba(0, 152, 234, 0.5);
+}

@@ -1,0 +1,89 @@
+
+syntax = "proto3";
+
+package stonfi.omni.v1beta8;
+option go_package = "github.com/ton-pay-router/core/proto/stonfi/omni/v1beta8/types";
+
+import "stonfi/common/v1/types/chain_address.proto";
+import "stonfi/omni/v1beta8/types/common.proto";
+
+enum ExecutionPhase {
+  EXECUTION_PHASE_CREATED = 0;
+  EXECUTION_PHASE_READY_FOR_PRIVATE_COMPLETION = 1;
+  EXECUTION_PHASE_READY_FOR_PUBLIC_COMPLETION = 2;
+  EXECUTION_PHASE_READY_FOR_PRIVATE_ROLLBACK = 3;
+  EXECUTION_PHASE_READY_FOR_PUBLIC_ROLLBACK = 4;
+  EXECUTION_PHASE_COMPLETED = 10;
+  EXECUTION_PHASE_ROLLED_BACK = 11;
+}
+
+message ExecutionPhaseTimestamps {
+  optional uint64 private_completion_available_timestamp = 1;
+  optional uint64 public_completion_available_timestamp = 2;
+  uint64 private_rollback_available_timestamp = 3;
+  optional uint64 public_rollback_available_timestamp = 4;
+}
+
+message Execution {
+  uint64 index = 1;
+  string input_units = 2;
+  string output_units = 3;
+  string resolver_sends_units = 4;
+  optional bytes secret_hash = 5;
+  string resolver_id = 6;
+  string resolver_name = 7;
+  stonfi.common.v1.ChainAddress input_position_address = 10;
+  ExecutionPhase input_position_phase = 11;
+  ExecutionPhaseTimestamps input_position_phase_timestamps = 12;
+  stonfi.common.v1.ChainAddress src_resolver_address = 13;
+  optional stonfi.common.v1.ChainAddress output_position_address = 20;
+  optional ExecutionPhase output_position_phase = 21;
+  optional ExecutionPhaseTimestamps output_position_phase_timestamps = 22;
+}
+
+enum OrderCancellationMode {
+  ORDER_CANCELLATION_MODE_UNAVAILABLE = 0;
+  ORDER_CANCELLATION_MODE_OFFCHAIN = 1;
+  ORDER_CANCELLATION_MODE_ONCHAIN = 2;
+}
+
+message Order {
+  TradeStatus status = 1;
+  stonfi.common.v1.ChainAddress protocol_contract_address = 2;
+  string remaining_input_units = 3;
+  string escrowed_input_units = 4;
+  OrderCancellationMode cancellation_mode = 5;
+  repeated Execution executions = 10;
+  optional uint64 estimated_finish_timestamp = 20;
+  optional uint64 maximum_finish_timestamp = 21;
+}
+
+message OrderStatusEvent {
+  oneof event {
+    Order order = 1;
+    KeepAlive keep_alive = 100;
+  }
+}
+
+message SignedOrderEvmV1 {
+  bytes encoded_order = 1;
+  bytes signature = 2;
+  bytes order_extension = 3;
+}
+
+message SignedOrder {
+  oneof order {
+    SignedOrderEvmV1 evm_v1 = 1;
+  }
+}
+
+message SignedOrderCancellationEvmV1 {
+  bytes encoded_cancellation = 1;
+  bytes signature = 2;
+}
+
+message SignedOrderCancellation {
+  oneof cancellation {
+    SignedOrderCancellationEvmV1 evm_v1 = 1;
+  }
+}

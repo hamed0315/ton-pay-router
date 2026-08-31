@@ -1,0 +1,2 @@
+
+ALTER TABLE merchants ADD COLUMN fee_percent NUMERIC(5,2) DEFAULT 0.5;
