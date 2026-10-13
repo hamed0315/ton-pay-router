@@ -127,6 +127,7 @@ func generateSecret() string {
 	return hex.EncodeToString(b)
 }
 
+// TODO: move HMAC secret to config
 func hashAPIKey(apiKey string) string {
 	h := hmac.New(sha256.New, []byte("ton-pay-router-secret"))
 	h.Write([]byte(apiKey))
